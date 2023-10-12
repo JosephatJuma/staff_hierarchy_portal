@@ -1,0 +1,18 @@
+.topbar-logo {
+  color: #ffff;
+}
+.link {
+  text-decoration: none;
+}
+.rotate-icon {
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
