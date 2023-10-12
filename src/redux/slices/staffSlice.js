@@ -89,6 +89,7 @@ const initialState = {
     },
   ],
   loading: false,
+  submitting: false,
   error: "",
   success: false,
   message: "",
@@ -107,6 +108,9 @@ const staffSlice = createSlice({
     },
     setLoading(state, action) {
       state.loading = action.payload;
+    },
+    setSubmitting(state, action) {
+      state.submitting = action.payload;
     },
     setError(state, action) {
       state.error = action.payload;
@@ -134,6 +138,7 @@ const staffSlice = createSlice({
 export const {
   setStaffMembers,
   setLoading,
+  setSubmitting,
   setError,
   setSuccess,
   setMessage,
