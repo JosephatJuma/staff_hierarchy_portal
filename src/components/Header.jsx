@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material";
 import { Menu, PersonAddAlt } from "@mui/icons-material";
 import AccountMenu from "./ActionMenu";
-
+import { useDispatch } from "react-redux";
+import { toggleShowAddModal } from "../redux/slices/staffSlice";
 function Header(props) {
+  const dispatch = useDispatch();
   const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
@@ -51,6 +53,7 @@ function Header(props) {
             }}
             endIcon={<PersonAddAlt />}
             variant="contained"
+            onClick={() => dispatch(toggleShowAddModal())}
           >
             Add Staff
           </Button>

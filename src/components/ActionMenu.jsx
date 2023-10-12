@@ -30,7 +30,7 @@ export default function AccountMenu(props) {
             className="rotate-icon"
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{ mr: 2 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
@@ -74,7 +74,7 @@ export default function AccountMenu(props) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <Typography sx={{ padding: "16px" }}>Configrarions</Typography>
+        <Typography sx={{ padding: "16px" }}>Configerations</Typography>
         <Divider />
         <MenuItem
           onClick={

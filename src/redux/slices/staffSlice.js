@@ -56,7 +56,7 @@ const initialState = {
               name: "Osborn Mukasa",
               subordinates: [
                 {
-                  id: "5",
+                  id: "098",
                   label: "IT Security Officer",
                   name: "Paul Ongaba",
                   subordinates: [],
@@ -70,7 +70,14 @@ const initialState = {
                       id: "508",
                       label: "Lead Software Developer",
                       name: "Wandera Henry",
-                      subordinates: [],
+                      subordinates: [
+                        {
+                          id: "7808",
+                          label: "Frontend Developer",
+                          name: "Julie Mbinga",
+                          subordinates: [],
+                        },
+                      ],
                     },
                   ],
                 },
