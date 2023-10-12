@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, CssBaseline, Drawer, Paper } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -6,7 +6,12 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import DrawerComponent from "./components/DrawerComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleShowAddModal, setError } from "./redux/slices/staffSlice";
+
+import {
+  toggleShowAddModal,
+  setError,
+  setMessage,
+} from "./redux/slices/staffSlice";
 import FormModal from "./components/FormModal";
 import AddStaffForm from "./forms/AddStaffForm";
 import SuccessAlert from "./components/SuccessAlert";
@@ -23,7 +28,7 @@ function MainLayout(props) {
   const showAdd = useSelector((state) => state.staff.showAddModal);
   const successMessage = useSelector((state) => state.staff.message);
   const errorMessage = useSelector((state) => state.staff.error);
-  const { handleSubmit } = useStaff();
+  const { handleSubmit, handleFetch } = useStaff();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -35,7 +40,10 @@ function MainLayout(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-
+  //Fetch users
+  useEffect(() => {
+    handleFetch();
+  }, []);
   return (
     <Box
       sx={{
@@ -96,11 +104,7 @@ function MainLayout(props) {
             },
           }}
         >
-          <DrawerComponent
-            drawerWidth={drawerWidth}
-            toggleDrawer={handleDrawerToggle}
-            logout={handleLogout}
-          />
+          <DrawerComponent drawerWidth={drawerWidth} logout={handleLogout} />
         </Drawer>
       </Box>
       <Box
@@ -118,10 +122,10 @@ function MainLayout(props) {
         <Box
           style={{
             marginTop: 100,
-            marginLeft: -10,
             padding: 0,
             "@media (minWidth: 600px)": {
               width: "100vw",
+              overflowY: "auto",
             },
           }}
         >
@@ -134,7 +138,10 @@ function MainLayout(props) {
         >
           <AddStaffForm handleSubmit={handleSubmit} />
         </FormModal>
-        <SuccessAlert message={successMessage} />
+        <SuccessAlert
+          message={successMessage}
+          close={() => dispatch(setMessage(""))}
+        />
         <ErrorAlert error={errorMessage} close={() => dispatch(setError(""))} />
       </Box>
     </Box>

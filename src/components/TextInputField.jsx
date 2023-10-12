@@ -2,7 +2,7 @@ import React from "react";
 import { TextField } from "@mui/material";
 import { useField } from "formik";
 
-export const TextInputField = ({ ...props }) => {
+const TextInputField = ({ ...props }) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : "";
   var name = props.name;
@@ -41,3 +41,4 @@ export const TextInputField = ({ ...props }) => {
     </div>
   );
 };
+export default TextInputField;

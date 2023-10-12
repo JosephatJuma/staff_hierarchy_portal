@@ -8,6 +8,7 @@ import {
   setSubmitting,
   setSuccess,
   setMessage,
+  setUserList,
 } from "../../redux/slices/staffSlice";
 
 function useStaff() {
@@ -19,6 +20,7 @@ function useStaff() {
     if (response.status === 201) {
       console.log(response.data);
       dispatch(setMessage(response.data.message));
+      dispatch(toggleShowAddModal());
     } else {
       if (response.response) dispatch(setError(response.response.data.message));
       else dispatch(setError("An unknown error occured!"));
@@ -26,7 +28,19 @@ function useStaff() {
     dispatch(setSubmitting(false));
   };
 
-  return { handleSubmit };
+  const handleFetch = async () => {
+    dispatch(setLoading(true));
+    const response = await apiClient.getAllStaff();
+    if (response.status === 200) {
+      dispatch(setUserList(response.data));
+    } else {
+      if (response.response) dispatch(setError(response.response.data.message));
+      else dispatch(setError("An unknown error occured!"));
+    }
+    dispatch(setLoading(false));
+  };
+
+  return { handleSubmit, handleFetch };
 }
 
 export default useStaff;

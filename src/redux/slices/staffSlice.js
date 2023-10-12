@@ -88,7 +88,9 @@ const initialState = {
       ],
     },
   ],
-  loading: false,
+  userList: [],
+  selectedStaff: {},
+  loading: true,
   submitting: false,
   error: "",
   success: false,
@@ -105,6 +107,12 @@ const staffSlice = createSlice({
   reducers: {
     setStaffMembers(state, action) {
       state.staffMembers = action.payload;
+    },
+    setUserList(state, action) {
+      state.userList = action.payload;
+    },
+    setSelectedStaff(state, action) {
+      state.selectedStaff = action.payload;
     },
     setLoading(state, action) {
       state.loading = action.payload;
@@ -137,6 +145,8 @@ const staffSlice = createSlice({
 });
 export const {
   setStaffMembers,
+  setUserList,
+  setSelectedStaff,
   setLoading,
   setSubmitting,
   setError,

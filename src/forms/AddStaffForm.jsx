@@ -1,16 +1,32 @@
 import React from "react";
 import { Formik } from "formik";
-import { Grid, Button, TextField, Box } from "@mui/material";
-import { TextInputField } from "../components/TextInputField";
+import { Grid, Button, Box } from "@mui/material";
+import TextInputField from "../components/TextInputField";
+import SelectField from "../components/SelectField";
 import { LoadingButton } from "@mui/lab";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
+
 function AddStaffForm(props) {
   const submitting = useSelector((state) => state.staff.submitting);
+  const userList = useSelector((state) => state.staff.userList);
+
+  const loading = useSelector((state) => state.staff.loading);
   const validationSchema = yup.object({
     name: yup.string().required("Name is required"),
     role: yup.string().required("Role is required"),
+    supervisorId: yup.string().required("You must select the supervisor"),
   });
+
+  function validateSelect(value) {
+    let error;
+    if (!value) {
+      error = "Required";
+    } else {
+      error = "";
+    }
+    return error;
+  }
 
   return (
     <div>
@@ -18,11 +34,12 @@ function AddStaffForm(props) {
         initialValues={{
           name: "",
           role: "",
+          supervisorId: "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
           props.handleSubmit(values);
-          //console.log(values);
+          console.log(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -66,6 +83,32 @@ function AddStaffForm(props) {
                 </div>
               </Grid>
             </Grid>
+            <div>
+              <label htmlFor="supervisorId">
+                Reports To<span className="asterisks">*</span>
+              </label>
+
+              {loading ? (
+                // Render a loading indicator or message while data is being fetched
+                <p>Loading...</p>
+              ) : (
+                // Render the SelectField component when options are available
+                <SelectField
+                  labelName="Select Supervisor"
+                  name="supervisorId"
+                  validate={validateSelect}
+                  fullWidth
+                  size="small"
+                  sx={{
+                    marginTop: "5px",
+                  }}
+                  MenuItems={userList.map((user) => ({
+                    value: user.id,
+                    label: user.role,
+                  }))}
+                />
+              )}
+            </div>
 
             <div className="form-grid">
               {submitting ? (
