@@ -16,3 +16,17 @@
     transform: rotate(360deg);
   }
 }
+
+/* Staff form */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.asterisks {
+  color: red;
+}
+.form-input {
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+}

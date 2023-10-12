@@ -4,28 +4,28 @@ const initialState = {
   staffMembers: [
     {
       id: "90",
-      label: "Board of Directors (BOD)",
+      role: "Board of Directors (BOD)",
       name: "Sylvia Mugereka",
       subordinates: [
         {
           id: "1",
-          label: "Chief Excecutive Officer (CEO)",
+          role: "Chief Excecutive Officer (CEO)",
           name: "Kevin Wangira",
           subordinates: [
             {
               id: "2",
-              label: "Chief Financial Officer (CFO)",
+              role: "Chief Financial Officer (CFO)",
               name: "Juliet Nekesa",
               subordinates: [
                 {
                   id: "52",
-                  label: "Internal Audit",
+                  role: "Internal Audit",
                   name: "Nalujja Jacinta",
                   subordinates: [],
                 },
                 {
                   id: "53",
-                  label: "Accountant",
+                  role: "Accountant",
                   name: "Adong Holga",
                   subordinates: [],
                 },
@@ -33,18 +33,18 @@ const initialState = {
             },
             {
               id: "3",
-              label: "Chief Operating Officer (COO)",
+              role: "Chief Operating Officer (COO)",
               name: "Kenneth Bwire",
               subordinates: [
                 {
                   id: "8",
-                  label: "Human Resources",
+                  role: "Human Resources",
                   name: "Janet Nalukwago",
                   subordinates: [],
                 },
                 {
                   id: "9",
-                  label: "Operations Manager",
+                  role: "Operations Manager",
                   name: "Micheal Smith",
                   subordinates: [],
                 },
@@ -52,28 +52,28 @@ const initialState = {
             },
             {
               id: "4",
-              label: "Chief Technology Officer (CTO)",
+              role: "Chief Technology Officer (CTO)",
               name: "Osborn Mukasa",
               subordinates: [
                 {
                   id: "098",
-                  label: "IT Security Officer",
+                  role: "IT Security Officer",
                   name: "Paul Ongaba",
                   subordinates: [],
                 },
                 {
                   id: "5",
-                  label: "Technical Lead",
+                  role: "Technical Lead",
                   name: "Bob Tumukunde",
                   subordinates: [
                     {
                       id: "508",
-                      label: "Lead Software Developer",
+                      role: "Lead Software Developer",
                       name: "Wandera Henry",
                       subordinates: [
                         {
                           id: "7808",
-                          label: "Frontend Developer",
+                          role: "Frontend Developer",
                           name: "Julie Mbinga",
                           subordinates: [],
                         },

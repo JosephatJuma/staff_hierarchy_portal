@@ -15,7 +15,7 @@ export default function AccountMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(false);
   const dispatch = useDispatch();
   const themeMode = useSelector((state) => state.theme.mode);
-  const open = anchorEl;
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,7 +42,7 @@ export default function AccountMenu(props) {
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
-        open={open}
+        open={anchorEl ? true : false}
         onClose={handleClose}
         onClick={handleClose}
         PaperProps={{

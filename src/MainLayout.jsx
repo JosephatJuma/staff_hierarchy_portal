@@ -2,10 +2,13 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { Box, CssBaseline, Drawer, Paper } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import Header from "./components/Header";
 import DrawerComponent from "./components/DrawerComponent";
-
+import { useDispatch, useSelector } from "react-redux";
+import { toggleShowAddModal } from "./redux/slices/staffSlice";
+import FormModal from "./components/FormModal";
+import AddStaffForm from "./forms/AddStaffForm";
 const drawerWidth = 240;
 
 function MainLayout(props) {
@@ -13,6 +16,8 @@ function MainLayout(props) {
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const themeMode = useSelector((state) => state.theme.mode);
+  const dispatch = useDispatch();
+  const showAdd = useSelector((state) => state.staff.showAddModal);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -85,7 +90,11 @@ function MainLayout(props) {
             },
           }}
         >
-          <DrawerComponent drawerWidth={drawerWidth} logout={handleLogout} />
+          <DrawerComponent
+            drawerWidth={drawerWidth}
+            toggleDrawer={handleDrawerToggle}
+            logout={handleLogout}
+          />
         </Drawer>
       </Box>
       <Box
@@ -106,13 +115,19 @@ function MainLayout(props) {
             marginLeft: -10,
             padding: 0,
             "@media (minWidth: 600px)": {
-              width: "auto",
               width: "100vw",
             },
           }}
         >
           <Outlet />
         </Box>
+        <FormModal
+          open={showAdd}
+          handleClose={() => dispatch(toggleShowAddModal())}
+          title="Add a staff member"
+        >
+          <AddStaffForm />
+        </FormModal>
       </Box>
     </Box>
   );

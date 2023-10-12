@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Grid,
-  Card,
-  Typography,
-} from "@mui/material";
+import { List, Grid, Card, Typography, IconButton } from "@mui/material";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -27,8 +20,8 @@ const TreeView = ({ data }) => {
     <List sx={{ width: "100%" }}>
       {nodes.map((node) => (
         <div key={node.id}>
-          <Card button onClick={() => handleClick(node.id)} sx={{ padding: 2 }}>
-            <Typography sx={{ fontSize: "13px" }}>{node.label} </Typography>
+          <Card onClick={() => handleClick(node.id)} sx={{ padding: 2 }}>
+            <Typography sx={{ fontSize: "13px" }}>{node.role} </Typography>
             <Typography sx={{ fontSize: "13px" }}>{node.name} </Typography>
             {node.subordinates.length > 0 && (
               <>

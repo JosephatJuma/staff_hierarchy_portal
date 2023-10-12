@@ -43,7 +43,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, logout }) {
       {/* This is the container of the Logo on the Drawer/Sidebar */}
       <Toolbar style={{ backgroundColor: "#0F9D58", margin: 0 }}>
         <div className="topbar-logo">
-          <Typography fontWeight="bold">Staff Hierarchy Disaply</Typography>
+          <Typography fontWeight="bold">Staff Hierarchy Display</Typography>
         </div>
       </Toolbar>
 
