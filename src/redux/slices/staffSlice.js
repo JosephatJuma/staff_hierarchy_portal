@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  staffHierarchy: [],
   staffMembers: [
     {
       id: "90",
@@ -105,6 +106,9 @@ const staffSlice = createSlice({
   name: "staff",
   initialState,
   reducers: {
+    setStaffHierarchy(state, action) {
+      state.staffHierarchy = action.payload;
+    },
     setStaffMembers(state, action) {
       state.staffMembers = action.payload;
     },
@@ -144,6 +148,7 @@ const staffSlice = createSlice({
   },
 });
 export const {
+  setStaffHierarchy,
   setStaffMembers,
   setUserList,
   setSelectedStaff,

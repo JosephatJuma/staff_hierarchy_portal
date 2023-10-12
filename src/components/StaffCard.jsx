@@ -40,27 +40,27 @@ function StaffCard(props) {
   return (
     <Card
       sx={{
-        margin: 1,
+        margin: "2px",
         flex: 1,
         padding: 1,
+        borderRadius: 1,
         minWidth: "48%", // Default width for small screens
         "@media (min-width: 600px)": {
           width: "20%", // Adjust the width for larger screens
           minWidth: "200px", // Set a minimum width for the card
         },
         "&:hover": {
-          boxShadow: "3px 5px 10px 0px #72c1c6",
+          boxShadow: "0px 2px 8px #72c1c6",
         },
       }}
     >
-      <div>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <IconButton
           aria-controls={anchorEl ? "action-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={anchorEl ? "true" : undefined}
           onClick={handleOpen}
           size="small"
-          sx={{ alignSelf: "flex-end" }}
         >
           <MoreVert />
         </IconButton>
@@ -87,7 +87,7 @@ function StaffCard(props) {
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "right",
         }}
       >
         <MenuItem onClick={handleClose}>

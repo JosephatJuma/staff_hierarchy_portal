@@ -11,11 +11,13 @@ import {
   toggleShowAddModal,
   setError,
   setMessage,
+  toggleShowDeleteModal,
 } from "./redux/slices/staffSlice";
 import FormModal from "./components/FormModal";
 import AddStaffForm from "./forms/AddStaffForm";
 import SuccessAlert from "./components/SuccessAlert";
 import ErrorAlert from "./components/ErrorAlert";
+import ConfirmAlert from "./components/ConfirmAlert";
 import useStaff from "./api/hooks/useStaff";
 const drawerWidth = 240;
 
@@ -26,9 +28,13 @@ function MainLayout(props) {
   const themeMode = useSelector((state) => state.theme.mode);
   const dispatch = useDispatch();
   const showAdd = useSelector((state) => state.staff.showAddModal);
+  const showDelete = useSelector((state) => state.staff.showDeleteModal);
+  const deleting = useSelector((state) => state.staff.submitting);
   const successMessage = useSelector((state) => state.staff.message);
   const errorMessage = useSelector((state) => state.staff.error);
-  const { handleSubmit, handleFetch } = useStaff();
+  const selectedStaff = useSelector((state) => state.staff.selectedStaff);
+  const { handleSubmit, handleFetch, handleDelete, fetchHierarchy } =
+    useStaff();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -43,6 +49,7 @@ function MainLayout(props) {
   //Fetch users
   useEffect(() => {
     handleFetch();
+    fetchHierarchy();
   }, []);
   return (
     <Box
@@ -121,7 +128,7 @@ function MainLayout(props) {
         {/* <Toolbar /> */}
         <Box
           style={{
-            marginTop: 100,
+            marginTop: 70,
             padding: 0,
             "@media (minWidth: 600px)": {
               width: "100vw",
@@ -143,6 +150,13 @@ function MainLayout(props) {
           close={() => dispatch(setMessage(""))}
         />
         <ErrorAlert error={errorMessage} close={() => dispatch(setError(""))} />
+        <ConfirmAlert
+          open={showDelete}
+          close={() => dispatch(toggleShowDeleteModal())}
+          action={() => handleDelete(selectedStaff.id)}
+          message={`Do you want to delete this staff?`}
+          performing={deleting}
+        />
       </Box>
     </Box>
   );

@@ -2,8 +2,10 @@ import React from "react";
 import ApiClient from "../apiClient";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setStaffHierarchy,
   setError,
   toggleShowAddModal,
+  toggleShowDeleteModal,
   setLoading,
   setSubmitting,
   setSuccess,
@@ -14,11 +16,26 @@ import {
 function useStaff() {
   const apiClient = new ApiClient();
   const dispatch = useDispatch();
+
+  //staff hierarchy
+  const fetchHierarchy = async () => {
+    dispatch(setLoading(true));
+    const response = await apiClient.getStaffHierarchy();
+    if (response.status === 200) {
+      dispatch(setStaffHierarchy(response.data));
+    } else {
+      if (response.response) dispatch(setError(response.response.data.message));
+      else dispatch(setError("An unknown error occured!"));
+    }
+    dispatch(setLoading(false));
+  };
+
+  //Submitting Staff
   const handleSubmit = async (values) => {
     dispatch(setSubmitting(true));
     const response = await apiClient.postStaff(values);
     if (response.status === 201) {
-      console.log(response.data);
+      handleFetch();
       dispatch(setMessage(response.data.message));
       dispatch(toggleShowAddModal());
     } else {
@@ -28,6 +45,7 @@ function useStaff() {
     dispatch(setSubmitting(false));
   };
 
+  //Fetching all staff
   const handleFetch = async () => {
     dispatch(setLoading(true));
     const response = await apiClient.getAllStaff();
@@ -40,7 +58,22 @@ function useStaff() {
     dispatch(setLoading(false));
   };
 
-  return { handleSubmit, handleFetch };
+  //Delete
+  const handleDelete = async (id) => {
+    dispatch(setSubmitting(true));
+    const response = await apiClient.deleteStaff(id);
+    if (response.status === 200) {
+      handleFetch();
+      dispatch(setMessage(response.data.message));
+    } else {
+      if (response.response) dispatch(setError(response.response.data.message));
+      else dispatch(setError("An unknown error occured!"));
+    }
+    dispatch(setSubmitting(false));
+    dispatch(toggleShowDeleteModal());
+  };
+
+  return { handleSubmit, handleFetch, handleDelete, fetchHierarchy };
 }
 
 export default useStaff;
