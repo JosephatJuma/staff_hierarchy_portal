@@ -4,7 +4,7 @@ import { Container, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 function StaffHierarchy() {
   const staffMembers = useSelector((state) => state.staff.staffMembers);
-  const staffHierarchy = useSelector((state) => state.staff.staffMembers);
+  const staffHierarchy = useSelector((state) => state.staff.staffHierarchy);
 
   return (
     <Container>

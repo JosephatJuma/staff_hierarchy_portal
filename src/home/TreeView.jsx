@@ -23,7 +23,7 @@ const TreeView = ({ data }) => {
           <Card onClick={() => handleClick(node.id)} sx={{ padding: 2 }}>
             <Typography sx={{ fontSize: "13px" }}>{node.role} </Typography>
             <Typography sx={{ fontSize: "13px" }}>{node.name} </Typography>
-            {node.subordinates.length > 0 && (
+            {node.subordinates && node.subordinates.length > 0 && (
               <>
                 {open.includes(node.id) ? (
                   <ExpandLessIcon />

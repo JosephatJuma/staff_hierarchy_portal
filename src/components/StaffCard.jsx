@@ -74,6 +74,7 @@ function StaffCard(props) {
       <center>
         <Typography>{props.staff.name}</Typography>
         <Typography>{props.staff.role}</Typography>
+        <Typography>{props.staff.subordinates.length}</Typography>
       </center>
 
       <Menu

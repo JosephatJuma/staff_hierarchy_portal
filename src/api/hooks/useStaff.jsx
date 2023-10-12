@@ -36,6 +36,7 @@ function useStaff() {
     const response = await apiClient.postStaff(values);
     if (response.status === 201) {
       handleFetch();
+      fetchHierarchy();
       dispatch(setMessage(response.data.message));
       dispatch(toggleShowAddModal());
     } else {
@@ -64,6 +65,7 @@ function useStaff() {
     const response = await apiClient.deleteStaff(id);
     if (response.status === 200) {
       handleFetch();
+      fetchHierarchy();
       dispatch(setMessage(response.data.message));
     } else {
       if (response.response) dispatch(setError(response.response.data.message));
