@@ -6,6 +6,7 @@ import { LoadingButton } from "@mui/lab";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
 function AddStaffForm(props) {
+  const submitting = useSelector((state) => state.staff.submitting);
   const validationSchema = yup.object({
     name: yup.string().required("Name is required"),
     role: yup.string().required("Role is required"),
@@ -20,8 +21,8 @@ function AddStaffForm(props) {
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          //props.handleSubmit(values);
-          console.log(values);
+          props.handleSubmit(values);
+          //console.log(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -67,7 +68,7 @@ function AddStaffForm(props) {
             </Grid>
 
             <div className="form-grid">
-              {props.submitting ? (
+              {submitting ? (
                 <LoadingButton
                   className="btnNext"
                   loading

@@ -6,9 +6,12 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import DrawerComponent from "./components/DrawerComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleShowAddModal } from "./redux/slices/staffSlice";
+import { toggleShowAddModal, setError } from "./redux/slices/staffSlice";
 import FormModal from "./components/FormModal";
 import AddStaffForm from "./forms/AddStaffForm";
+import SuccessAlert from "./components/SuccessAlert";
+import ErrorAlert from "./components/ErrorAlert";
+import useStaff from "./api/hooks/useStaff";
 const drawerWidth = 240;
 
 function MainLayout(props) {
@@ -18,6 +21,9 @@ function MainLayout(props) {
   const themeMode = useSelector((state) => state.theme.mode);
   const dispatch = useDispatch();
   const showAdd = useSelector((state) => state.staff.showAddModal);
+  const successMessage = useSelector((state) => state.staff.message);
+  const errorMessage = useSelector((state) => state.staff.error);
+  const { handleSubmit } = useStaff();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -126,8 +132,10 @@ function MainLayout(props) {
           handleClose={() => dispatch(toggleShowAddModal())}
           title="Add a staff member"
         >
-          <AddStaffForm />
+          <AddStaffForm handleSubmit={handleSubmit} />
         </FormModal>
+        <SuccessAlert message={successMessage} />
+        <ErrorAlert error={errorMessage} close={() => dispatch(setError(""))} />
       </Box>
     </Box>
   );
