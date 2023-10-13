@@ -49,55 +49,44 @@ const StaffList = (props) => {
     dispatch(toggleShowEditModal());
   };
 
-  const renderStaff = ({ member }) => {
-    return (
-      <Card
-        style={{
-          margin: 5,
-          flex: 1,
-          padding: 10,
-          borderRadius: 1,
-          minWidth: "45%",
-          boxShadow: "0px 2px 8px #72c1c6",
-          alignContent: "center",
-        }}
-      >
-        <Avatar.Icon size={100} icon="account" />
-
-        <Title variant="bodySmall">{member.name}</Title>
-        <Text variant="bodySmall">{member.role}</Text>
-        {staff.supervisor && (
-          <Text variant="bodySmall">
-            Supervided by: {member.supervisor.name}
-          </Text>
-        )}
-        <Text variant="bodySmall">Subordinates:</Text>
-      </Card>
-    );
-  };
   return (
     <View style={{ flex: 1, width: "100%" }}>
       <FlashList
-        // refreshControl={
-        //   <RefreshControl
-        //     onRefresh={onRefresh}
-        //     size="default"
-        //     title="Relaoding"
-        //   />
-        // }
-
-        scrollEnabled={true}
-        showsVerticalScrollIndicator={true}
+        renderItem={({ item }) => {
+          return (
+            <Card
+              style={{
+                margin: 2,
+                padding: 10,
+                borderRadius: 1,
+                minWidth: "48%",
+                boxShadow: "0px 2px 8px #72c1c6",
+                justifyContent: "center",
+                height: 220,
+              }}
+            >
+              <Avatar.Icon size={80} icon="account" />
+              <Title variant="bodySmall">{item.name}</Title>
+              <Text variant="bodySmall">Role: {item.role}</Text>
+              <Text variant="bodySmall">
+                Subordinates: {item.subordinates.length}
+              </Text>
+              {item.supervisor && (
+                <Text variant="bodySmall">
+                  Supervided by: {item.supervisor.name}
+                </Text>
+              )}
+            </Card>
+          );
+        }}
+        estimatedItemSize={50}
         data={staffMembers}
-        renderItem={renderStaff}
-        keyExtractor={(member) => member.id}
         numColumns={2}
         initialNumToRender={10}
         maxToRenderPerBatch={10}
         onEndReachedThreshold={5}
         windowSize={5}
         removeClippedSubviews={true}
-        estimatedItemSize={166}
       />
     </View>
   );
