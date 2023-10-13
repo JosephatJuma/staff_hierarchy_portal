@@ -1,17 +1,26 @@
+import "react-native-gesture-handler";
 import { registerRootComponent } from "expo";
-import { PaperProvider } from "react-native-paper";
+import { PaperProvider, DefaultTheme, MD3DarkTheme } from "react-native-paper";
+
 import { StatusBar } from "expo-status-bar";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./src/redux/store";
 import App from "./App";
+
+const Application = () => {
+  const theme = useSelector((state) => state.theme.mode);
+  return (
+    <PaperProvider theme={theme === "dark" ? MD3DarkTheme : DefaultTheme}>
+      <StatusBar backgroundColor="#0F9D58" style="light" />
+      <App />
+    </PaperProvider>
+  );
+};
 
 const Main = () => {
   return (
     <Provider store={store}>
-      <PaperProvider>
-        <StatusBar backgroundColor="#0F9D58" style="light" />
-        <App />
-      </PaperProvider>
+      <Application />
     </Provider>
   );
 };

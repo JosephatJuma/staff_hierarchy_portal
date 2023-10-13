@@ -3,12 +3,22 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import Home from "./src/home/Home";
 import Staff from "./src/staff/Staff";
-import { NavigationContainer } from "@react-navigation/native";
+import AddStaff from "./src/add-user/AddStaff";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import useStaff from "./src/api/hooks/useStaff";
+import { useSelector } from "react-redux";
+
+const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
+  const theme = useSelector((state) => state.theme.mode);
   const {
     handleSubmit,
     handleFetch,
@@ -21,11 +31,20 @@ export default function App() {
     handleFetch();
     fetchHierarchy();
   }, []);
-  const HomeScreen = () => <Home />;
+
+  function HomeScreen() {
+    return (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="HomeScreen" component={Home} />
+        <Stack.Screen name="Add" component={AddStaff} />
+      </Stack.Navigator>
+    );
+  }
+
   const StaffScreen = () => <Staff />;
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
+      <NavigationContainer theme={theme === "dark" ? DarkTheme : DefaultTheme}>
         <Tab.Navigator
           nactiveColor="gray"
           screenOptions={({ route }) => ({

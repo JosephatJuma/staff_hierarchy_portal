@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { Appbar } from "react-native-paper";
 import React from "react";
-
+import { useNavigation } from "@react-navigation/native";
+import { useSelector, useDispatch } from "react-redux";
+import { changeMode } from "../redux/slices/themeSlice";
 const AppHeader = () => {
+  const navigate = useNavigation();
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.mode);
   const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
@@ -20,8 +25,20 @@ const AppHeader = () => {
   return (
     <Appbar.Header>
       <Appbar.Content title={greeting} color="#0F9D58" />
-      <Appbar.Action icon="cog" color="#0F9D58" />
-      <Appbar.Action icon="dots-vertical" />
+      <Appbar.Action
+        icon="theme-light-dark"
+        color="#0F9D58"
+        onPress={
+          theme === "dark"
+            ? () => dispatch(changeMode("light"))
+            : () => dispatch(changeMode("dark"))
+        }
+      />
+      <Appbar.Action
+        icon="account-plus"
+        color="#0F9D58"
+        onPress={() => navigate.navigate("Add")}
+      />
     </Appbar.Header>
   );
 };
