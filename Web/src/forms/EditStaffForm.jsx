@@ -106,6 +106,7 @@ function EditStaffForm(props) {
                   MenuItems={userList.map((user) => ({
                     value: user.id,
                     label: user.role,
+                    disabled: user.id === selectedStaff.id,
                   }))}
                 />
               )}

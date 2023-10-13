@@ -36,7 +36,11 @@ export default function SelectField({ ...props }) {
             {!!props.MenuItems?.length &&
               props.MenuItems.map((menuItem) => {
                 return (
-                  <MenuItem value={menuItem.value} key={menuItem.value}>
+                  <MenuItem
+                    value={menuItem.value}
+                    key={menuItem.value}
+                    disabled={menuItem.disabled}
+                  >
                     {menuItem.label} {/* Use label as the visible label */}
                   </MenuItem>
                 );
