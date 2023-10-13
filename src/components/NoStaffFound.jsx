@@ -10,14 +10,23 @@ const NoStaffFound = (props) => {
       alignStaff="center"
       height="50vh"
     >
-      <Card>
+      <Card sx={{ width: "100%" }}>
         <CardContent>
-          <Box textAlign="center">
+          <Box textAlign="center" justifyContent="center" alignStaff="center">
             <SentimentVeryDissatisfied fontSize="large" color="error" />
             <Typography variant="h6" color="textSecondary">
               Oops! {props.message}
             </Typography>
-            <Button variant="contained" onClick={props.refresh}>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#0F9D58",
+                ":hover": {
+                  backgroundColor: "#0F9D58c0",
+                },
+              }}
+              onClick={props.refresh}
+            >
               Retry
             </Button>
           </Box>
