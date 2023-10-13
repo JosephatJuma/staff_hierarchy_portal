@@ -80,23 +80,6 @@ function DrawerComponent({ drawerWidth, toggleDrawer, logout }) {
           );
         })}
       </List>
-
-      {/* This is the Logout Item on the Drawer/Sidebar */}
-      <List style={{ position: "absolute", bottom: "0", width: "100%" }}>
-        <ListItem
-          disablePadding
-          onClick={logout}
-          style={{ width: { drawerWidth } }}
-        >
-          <ListItemButton>
-            <ListItemIcon>
-              <Logout style={{ color: "white" }} />
-            </ListItemIcon>
-            <ListItemText primary={"Logout"} />
-          </ListItemButton>
-        </ListItem>
-      </List>
-      {/* This is the Logout Item on the Drawer/Sidebar */}
     </div>
   );
 }

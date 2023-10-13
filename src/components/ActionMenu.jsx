@@ -88,18 +88,6 @@ export default function AccountMenu(props) {
           </ListItemIcon>
           {themeMode === "light" ? " Dark Theme" : "Light Theme"}
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Manager
-        </MenuItem>
-        <MenuItem onClick={props.logout}>
-          <ListItemIcon>
-            <AdminPanelSettings />
-          </ListItemIcon>
-          Top Level Manager
-        </MenuItem>
       </Menu>
     </React.Fragment>
   );
