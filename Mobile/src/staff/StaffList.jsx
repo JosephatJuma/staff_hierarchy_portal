@@ -59,10 +59,11 @@ const StaffList = (props) => {
                 margin: 2,
                 padding: 10,
                 borderRadius: 1,
-                minWidth: "48%",
+                width: "98%",
                 boxShadow: "0px 2px 8px #72c1c6",
                 justifyContent: "center",
-                height: 220,
+                alignItems: "center",
+                height: 250,
               }}
             >
               <Avatar.Icon size={80} icon="account" />
