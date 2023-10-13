@@ -5,7 +5,7 @@ const AppHeader = () => {
   return (
     <Appbar.Header>
       <Appbar.Content title="Staff Hierarchy" />
-      <Appbar.Action icon="magnify" />
+      <Appbar.Action icon="cog" color="#0F9D58" />
       <Appbar.Action icon="dots-vertical" />
     </Appbar.Header>
   );

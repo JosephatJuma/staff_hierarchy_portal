@@ -14,7 +14,6 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator
           nactiveColor="gray"
-          shifting={true}
           screenOptions={({ route }) => ({
             headerShown: false,
             tabBarAndroidRipple: { borderless: true },
@@ -23,7 +22,7 @@ export default function App() {
               let iconName;
               if (route.name === "Home") {
                 iconName = focused ? "home" : "home";
-              } else if (route.name === "Users") {
+              } else if (route.name === "Staff") {
                 iconName = focused ? "group" : "group";
               }
               return <MaterialIcons name={iconName} size={25} color={color} />;
@@ -33,7 +32,7 @@ export default function App() {
           })}
         >
           <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Users" component={HomeScreen} />
+          <Tab.Screen name="Staff" component={HomeScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

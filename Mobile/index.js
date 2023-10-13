@@ -7,7 +7,7 @@ import App from "./App";
 const Main = () => {
   return (
     <PaperProvider>
-      <StatusBar backgroundColor="black" style="light" />
+      <StatusBar backgroundColor="#0F9D58" style="light" />
       <App />
     </PaperProvider>
   );
