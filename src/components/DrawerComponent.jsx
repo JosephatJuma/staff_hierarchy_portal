@@ -27,13 +27,9 @@ function DrawerComponent({ drawerWidth, toggleDrawer, logout }) {
       icon: <Home />,
       link: "/",
     },
+
     {
-      name: "Users",
-      icon: <School />,
-      link: "/users",
-    },
-    {
-      name: "Staff",
+      name: "Staff List",
       icon: <Group />,
       link: "/staff",
     },

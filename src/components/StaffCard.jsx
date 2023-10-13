@@ -72,9 +72,16 @@ function StaffCard(props) {
         </Avatar>
       </center>
       <center>
-        <Typography>{props.staff.name}</Typography>
-        <Typography>{props.staff.role}</Typography>
-        <Typography>{props.staff.subordinates.length}</Typography>
+        <Typography variant="subtitle2">{props.staff.name}</Typography>
+        <Typography variant="body2">{props.staff.role}</Typography>
+        {props.staff.supervisor && (
+          <Typography variant="body2">
+            Supervided by: {props.staff.supervisor.name}
+          </Typography>
+        )}
+        <Typography variant="body2">
+          Subordinates: {props.staff.subordinates.length}
+        </Typography>
       </center>
 
       <Menu
