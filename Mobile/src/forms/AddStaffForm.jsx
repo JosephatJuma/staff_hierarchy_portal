@@ -16,16 +16,20 @@ const AddStaffForm = () => {
   const validationSchema = yup.object({
     name: yup.string().required("Name is required"),
     role: yup.string().required("Role is required"),
-    supervisorId: yup.string().required("You must select the supervisor"),
+    //supervisorId: yup.string().required("You must select the supervisor"),
   });
 
   return (
-    <View style={{ marginTop: 100 }}>
+    <View style={{ flex: 1 }}>
       <Formik
         validationSchema={validationSchema}
-        initialValues={{ name: "", role: "", supervisorId: "" }}
+        initialValues={{ name: "", role: "", supervisor: {} }}
         onSubmit={(values) => {
-          handleSubmit(values);
+          handleSubmit({
+            name: values.name,
+            role: values.name,
+            supervisorId: values.supervisor.id,
+          });
         }}
       >
         {({
@@ -35,6 +39,7 @@ const AddStaffForm = () => {
           values,
           errors,
           touched,
+          setFieldValue,
         }) => (
           <View>
             <PaperTextInput
@@ -44,7 +49,7 @@ const AddStaffForm = () => {
               onBlur={handleBlur("name")}
               value={values.name}
               style={{ margin: 10 }}
-              //error={touched.name}
+              disabled={submitting}
             />
             <PaperTextInput
               mode="outlined"
@@ -53,6 +58,7 @@ const AddStaffForm = () => {
               onBlur={handleBlur("role")}
               value={values.role}
               style={{ margin: 10 }}
+              disabled={submitting}
             />
             <Menu
               visible={visible}
@@ -63,11 +69,12 @@ const AddStaffForm = () => {
                   showSoftInputOnFocus={false}
                   onPressIn={() => setVisible(true)}
                   value={
-                    values.supervisorId
-                      ? values.supervisorId
+                    values.supervisor !== null
+                      ? values.supervisor.role
                       : "Select Supervisor"
                   }
                   style={{ margin: 10 }}
+                  disabled={submitting}
                   right={
                     <PaperTextInput.Icon
                       icon="chevron-down"
@@ -82,7 +89,7 @@ const AddStaffForm = () => {
                   style={{ margin: 10 }}
                   key={index}
                   onPress={() => {
-                    handleChange("supervisorId")(item.id);
+                    setFieldValue("supervisor", item);
                     setVisible(false);
                   }}
                   title={item.role}
@@ -92,7 +99,7 @@ const AddStaffForm = () => {
             <Button
               onPress={handleSubmit}
               mode="contained"
-              style={{ margin: 10 }}
+              style={{ margin: 10, backgroundColor: "#0F9D58" }}
               loading={submitting}
             >
               Submit

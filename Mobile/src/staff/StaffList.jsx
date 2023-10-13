@@ -23,10 +23,11 @@ import {
   toggleShowViewModal,
   setSelectedStaff,
 } from "../redux/slices/staffSlice";
+import useStaff from "../api/hooks/useStaff";
 const StaffList = (props) => {
   const dispatch = useDispatch();
   const staffMembers = useSelector((state) => state.staff.userList);
-
+  const { handleFetch } = useStaff();
   const [showMenu, setShowMenu] = useState(false);
 
   const handleOpen = () => {
@@ -52,6 +53,13 @@ const StaffList = (props) => {
   return (
     <View style={{ flex: 1, width: "100%" }}>
       <FlashList
+        refreshControl={
+          <RefreshControl
+            onRefresh={handleFetch}
+            size="default"
+            title="Relaoding"
+          />
+        }
         renderItem={({ item }) => {
           return (
             <Card

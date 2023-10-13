@@ -1,12 +1,7 @@
 import React, { useState } from "react";
-import { Card, Text, Title, IconButton } from "react-native-paper";
-import {
-  AntDesign,
-  MaterialIcons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { Card, Text, IconButton } from "react-native-paper";
+
 import { View, FlatList } from "react-native";
-import { FlashList } from "@shopify/flash-list";
 const TreeView = ({ data }) => {
   const [open, setOpen] = useState([]);
 
@@ -36,9 +31,9 @@ const TreeView = ({ data }) => {
           <Text>{node.role}</Text>
 
           {node.subordinates && node.subordinates.length > 0 && (
-            <MaterialIcons
-              name={open.includes(node.id) ? "expand-less" : "expand-more"}
-              size={40}
+            <IconButton
+              icon={open.includes(node.id) ? "chevron-up" : "chevron-down"}
+              size={30}
             />
           )}
         </Card>
