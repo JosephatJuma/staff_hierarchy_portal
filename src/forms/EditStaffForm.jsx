@@ -39,7 +39,7 @@ function EditStaffForm(props) {
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          props.handleEdit(values);
+          props.handleEdit(values, selectedStaff.id);
           console.log(values);
         }}
       >

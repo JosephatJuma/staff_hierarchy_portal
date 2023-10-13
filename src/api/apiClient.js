@@ -50,6 +50,22 @@ export default class ApiClient {
     }
   }
 
+  //edit staff
+  async editStaff(values, staffId) {
+    try {
+      const response = await axios({
+        method: "put",
+        url: `${this.base_url}/staff/${staffId}`,
+        data: values,
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
   //delete staff member
   async deleteStaff(staffId) {
     try {

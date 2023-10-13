@@ -12,9 +12,11 @@ import {
   setError,
   setMessage,
   toggleShowDeleteModal,
+  toggleShowEditModal,
 } from "./redux/slices/staffSlice";
 import FormModal from "./components/FormModal";
 import AddStaffForm from "./forms/AddStaffForm";
+import EditStaffForm from "./forms/EditStaffForm";
 import SuccessAlert from "./components/SuccessAlert";
 import ErrorAlert from "./components/ErrorAlert";
 import ConfirmAlert from "./components/ConfirmAlert";
@@ -28,13 +30,19 @@ function MainLayout(props) {
   const themeMode = useSelector((state) => state.theme.mode);
   const dispatch = useDispatch();
   const showAdd = useSelector((state) => state.staff.showAddModal);
+  const showEdit = useSelector((state) => state.staff.showEditModal);
   const showDelete = useSelector((state) => state.staff.showDeleteModal);
   const deleting = useSelector((state) => state.staff.submitting);
   const successMessage = useSelector((state) => state.staff.message);
   const errorMessage = useSelector((state) => state.staff.error);
   const selectedStaff = useSelector((state) => state.staff.selectedStaff);
-  const { handleSubmit, handleFetch, handleDelete, fetchHierarchy } =
-    useStaff();
+  const {
+    handleSubmit,
+    handleFetch,
+    handleDelete,
+    fetchHierarchy,
+    handleEdit,
+  } = useStaff();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -144,6 +152,13 @@ function MainLayout(props) {
           title="Add a staff member"
         >
           <AddStaffForm handleSubmit={handleSubmit} />
+        </FormModal>
+        <FormModal
+          open={showEdit}
+          handleClose={() => dispatch(toggleShowEditModal())}
+          title={`Edit ${selectedStaff.name} `}
+        >
+          <EditStaffForm handleEdit={handleEdit} />
         </FormModal>
         <SuccessAlert
           message={successMessage}

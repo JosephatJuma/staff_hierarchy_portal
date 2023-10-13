@@ -37,6 +37,11 @@ function StaffCard(props) {
     dispatch(setSelectedStaff(staff));
     dispatch(toggleShowViewModal());
   };
+  const editStaff = (staff) => {
+    handleClose();
+    dispatch(setSelectedStaff(staff));
+    dispatch(toggleShowEditModal());
+  };
   return (
     <Card
       sx={{
@@ -98,18 +103,13 @@ function StaffCard(props) {
           horizontal: "right",
         }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => editStaff(props.staff)}>
           <ListItemIcon>
             <Edit />
           </ListItemIcon>
           Edit
         </MenuItem>
-        <MenuItem onClick={() => viewStaff(props.staff)}>
-          <ListItemIcon>
-            <Visibility />
-          </ListItemIcon>
-          Details
-        </MenuItem>
+
         <MenuItem onClick={() => deleteStaff(props.staff)}>
           <ListItemIcon>
             <Delete />
