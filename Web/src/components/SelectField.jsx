@@ -41,7 +41,8 @@ export default function SelectField({ ...props }) {
                     key={menuItem.value}
                     disabled={menuItem.disabled}
                   >
-                    {menuItem.label} {/* Use label as the visible label */}
+                    {menuItem.label}({menuItem.name})
+                    {/* Use label as the visible label */}
                   </MenuItem>
                 );
               })}

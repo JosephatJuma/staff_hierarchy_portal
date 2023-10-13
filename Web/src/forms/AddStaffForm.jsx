@@ -105,6 +105,7 @@ function AddStaffForm(props) {
                   MenuItems={userList.map((user) => ({
                     value: user.id,
                     label: user.role,
+                    name: user.name,
                   }))}
                 />
               )}
