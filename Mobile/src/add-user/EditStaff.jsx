@@ -1,13 +1,13 @@
 import { View, Text } from "react-native";
 import React from "react";
-import AddStaffForm from "../forms/AddStaffForm";
+import EditStaffForm from "../forms/EditStaffForm";
 import AppHeader from "../components/AppHeader";
 import ErrorAlert from "../components/ErrorAlert";
 import SuccessAlert from "../components/SuccessAlert";
 import { useSelector, useDispatch } from "react-redux";
 import { setError, setMessage } from "../redux/slices/staffSlice";
 import { useNavigation } from "@react-navigation/native";
-const AddStaff = () => {
+const EditStaff = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const errorMessage = useSelector((state) => state.staff.error);
@@ -19,12 +19,12 @@ const AddStaff = () => {
   };
 
   const navigateToHome = () => {
-    navigation.goBack();
+    navigation.navigate("Home");
   };
   return (
     <>
       <AppHeader />
-      <AddStaffForm />
+      <EditStaffForm />
       <ErrorAlert
         close={() => dispatch(setError(""))}
         message={errorMessage}
@@ -39,4 +39,4 @@ const AddStaff = () => {
   );
 };
 
-export default AddStaff;
+export default EditStaff;

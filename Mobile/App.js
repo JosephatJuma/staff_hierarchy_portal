@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import Home from "./src/home/Home";
 import Staff from "./src/staff/Staff";
 import AddStaff from "./src/add-user/AddStaff";
+import EditStaff from "./src/add-user/EditStaff";
 import {
   NavigationContainer,
   DefaultTheme,
@@ -37,6 +38,7 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="HomeScreen" component={Home} />
         <Stack.Screen name="Add" component={AddStaff} />
+        <Stack.Screen name="Edit" component={EditStaff} />
       </Stack.Navigator>
     );
   }

@@ -23,8 +23,11 @@ import {
   setSelectedStaff,
 } from "../redux/slices/staffSlice";
 import useStaff from "../api/hooks/useStaff";
+
+import { useNavigation } from "@react-navigation/native";
 const StaffList = (props) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const staffMembers = useSelector((state) => state.staff.userList);
   const { handleFetch } = useStaff();
 
@@ -35,7 +38,7 @@ const StaffList = (props) => {
 
   const editStaff = (staff) => {
     dispatch(setSelectedStaff(staff));
-    dispatch(toggleShowEditModal());
+    navigation.navigate("Edit");
   };
 
   return (
