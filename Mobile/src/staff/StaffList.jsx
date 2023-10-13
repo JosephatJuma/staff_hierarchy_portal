@@ -7,8 +7,8 @@ import {
   Avatar,
   Title,
   Text,
-  Menu,
   IconButton,
+  Button,
 } from "react-native-paper";
 
 import {
@@ -20,7 +20,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   toggleShowDeleteModal,
   toggleShowEditModal,
-  toggleShowViewModal,
   setSelectedStaff,
 } from "../redux/slices/staffSlice";
 import useStaff from "../api/hooks/useStaff";
@@ -28,24 +27,13 @@ const StaffList = (props) => {
   const dispatch = useDispatch();
   const staffMembers = useSelector((state) => state.staff.userList);
   const { handleFetch } = useStaff();
-  const [showMenu, setShowMenu] = useState(false);
-
-  const handleOpen = () => {
-    setShowMenu(true);
-  };
-
-  const handleClose = () => {
-    setShowMenu(false);
-  };
 
   const deleteStaff = (staff) => {
-    handleClose();
     dispatch(setSelectedStaff(staff));
     dispatch(toggleShowDeleteModal());
   };
 
   const editStaff = (staff) => {
-    handleClose();
     dispatch(setSelectedStaff(staff));
     dispatch(toggleShowEditModal());
   };
@@ -71,20 +59,34 @@ const StaffList = (props) => {
                 boxShadow: "0px 2px 8px #72c1c6",
                 justifyContent: "center",
                 alignItems: "center",
-                height: 250,
+                height: 300,
               }}
             >
               <Avatar.Icon size={80} icon="account" />
-              <Title variant="bodySmall">{item.name}</Title>
-              <Text variant="bodySmall">Role: {item.role}</Text>
-              <Text variant="bodySmall">
+              <Text variant="titleMedium">{item.name}</Text>
+              <Text variant="titleSmall">Role: {item.role}</Text>
+              <Text variant="titleSmall">
                 Subordinates: {item.subordinates.length}
               </Text>
               {item.supervisor && (
-                <Text variant="bodySmall">
+                <Text variant="titleSmall">
                   Supervided by: {item.supervisor.name}
                 </Text>
               )}
+              <View
+                style={{ display: "flex", flexDirection: "row", width: "100%" }}
+              >
+                <IconButton
+                  icon="account-edit"
+                  mode="outlined"
+                  onPress={() => editStaff(item)}
+                />
+                <IconButton
+                  icon="delete"
+                  mode="outlined"
+                  onPress={() => deleteStaff(item)}
+                />
+              </View>
             </Card>
           );
         }}

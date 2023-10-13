@@ -14,7 +14,10 @@ const AddStaffForm = () => {
 
   const loading = useSelector((state) => state.staff.loading);
   const validationSchema = yup.object({
-    name: yup.string().required("Name is required"),
+    name: yup
+      .string()
+      .required("Name is required")
+      .matches(/^[A-Za-z\s]+$/, "Please enter a valid full name"),
     role: yup.string().required("Role is required"),
     //supervisorId: yup.string().required("You must select the supervisor"),
   });
@@ -69,9 +72,9 @@ const AddStaffForm = () => {
                   showSoftInputOnFocus={false}
                   onPressIn={() => setVisible(true)}
                   value={
-                    values.supervisor !== null
-                      ? values.supervisor.role
-                      : "Select Supervisor"
+                    !values.supervisor.id
+                      ? "Select Supervisor"
+                      : values.supervisor.role
                   }
                   style={{ margin: 10 }}
                   disabled={submitting}
